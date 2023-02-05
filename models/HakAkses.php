@@ -11,11 +11,11 @@
       $this->conn = $database;
     }
 
-    function setNamaAkses($NamaAkses) {
-      $this->NamaAkses = $Role;
+    function setNamaAkses($namaAkses) {
+      $this->NamaAkses = $namaAkses;
     }
 
-    function setKeterangan($Keterangan) {
+    function setKeterangan($keterangan) {
       $this->Keterangan = $keterangan;
     }
     
@@ -24,7 +24,7 @@
     }
     
     function getKeterangan() {
-      return $keterangan;
+      return $Keterangan;
     }
 
     function CreateAkses() {
@@ -85,10 +85,4 @@
       }
     }
   }
-
-  // ** cara pakai!! **
-  // $akses = new HakAkses("blablaa");
-  // $akses->setNamaAkses('blabla');
-  // $akses->setKeterangan('blabla');
-  // $akses->PostAkses();
 ?>

@@ -3,5 +3,5 @@
 
   $hakAkses = new HakAksesController();
 
-  $hakAkses->TableHakAkses();
+  $hakAkses->FormHakAkses();
 ?>

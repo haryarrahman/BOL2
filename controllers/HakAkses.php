@@ -20,7 +20,19 @@
 
     public function TableHakAkses() { 
       $result = $this->model->GetListAkses();
-      $this->view->index($result);
+      $this->view->Table($result);
+    }
+
+    public function FormHakAkses() {
+      if (isset($_POST['nama_akses']) && isset($_POST['keterangan'])) {
+        $this->model->setNamaAkses($_POST['nama_akses']);
+        $this->model->setKeterangan($_POST['keterangan']);
+        $this->model->CreateAkses();
+
+        echo 'create successfully';
+      } else {
+        $this->view->Form();
+      }
     }
   }
 ?>
