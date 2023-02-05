@@ -1,5 +1,5 @@
 <?php 
-  class HakAkses {
+  class HakAksesModel {
     private $NamaAkses;
     private $Keterangan;
 
@@ -44,7 +44,7 @@
       $prepareDB = $this->conn->prepare($query);
       $prepareDB->execute();
       $listAkses = $prepareDB->fetchAll();
-      
+
       return $listAkses;
     }
 
