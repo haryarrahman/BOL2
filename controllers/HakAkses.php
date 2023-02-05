@@ -10,7 +10,6 @@
     private $view;
 
     public function __construct() {
-
       $config = new DatabaseConfig();
       $pdo = $config->getConnection();
 
@@ -18,20 +17,66 @@
       $this->view = new HakAksesView();
     }
 
+    private function SaveCreate() {
+      $this->model->setNamaAkses($_POST['nama_akses']);
+      $this->model->setKeterangan($_POST['keterangan']);
+      $data = $this->model->CreateAkses();
+
+      if ($data) {
+        header("location: index.php");
+      }
+    }
+
+    private function CreateNewAkses() {
+      $defaultValue=[
+        'id_akses' => '',
+        'nama_akses' => '',
+        'keterangan' => ''
+      ];
+
+      $this->view->Form($defaultValue);
+    }
+
+    private function SaveEdit() {
+      $this->model->setNamaAkses($_POST['nama_akses']);
+      $this->model->setKeterangan($_POST['keterangan']);
+      $data = $this->model->EditAkses($_POST['id_akses']);
+
+      if ($data) {
+        header("location: index.php");
+      }
+    }
+
+    private function FormEditAkses() {
+      $id = $_POST['edit'];
+      $prevData = $this->model->FindAksesById($id)[0];
+
+      $defaultValue=[
+        'id_akses' => $prevData['id_akses'],
+        'nama_akses' => $prevData['nama_akses'],
+        'keterangan' => $prevData['keterangan']
+      ];
+
+      $this->view->Form($defaultValue);
+    }
+    
+
     public function TableHakAkses() { 
-      $result = $this->model->GetListAkses();
-      $this->view->Table($result);
+      if (isset($_POST['id_akses']) && isset($_POST['nama_akses']) && isset($_POST['keterangan'])) {
+          $this->SaveEdit();
+      } else if (isset($_POST['edit']) ) {
+          $this->FormEditAkses();
+      } else {
+          $result = $this->model->GetListAkses();
+          $this->view->Table($result);
+      }
     }
 
     public function FormHakAkses() {
       if (isset($_POST['nama_akses']) && isset($_POST['keterangan'])) {
-        $this->model->setNamaAkses($_POST['nama_akses']);
-        $this->model->setKeterangan($_POST['keterangan']);
-        $this->model->CreateAkses();
-
-        echo 'create successfully';
+          $this->SaveCreate();
       } else {
-        $this->view->Form();
+          $this->CreateNewAkses();
       }
     }
   }

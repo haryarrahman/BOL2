@@ -63,7 +63,7 @@
 
     function EditAkses($id) {
       try {
-        $query = "UPDATE hak_akses SET nama_akses = ? , keterangan = ? WHERE id_akses = ?";
+        $query = "UPDATE hak_akses SET `nama_akses`=? , `keterangan`=? WHERE id_akses = ?";
         $prepareDB = $this->conn->prepare($query);
         $editAkses = $prepareDB->execute([$this->NamaAkses, $this->Keterangan, $id]);
 
