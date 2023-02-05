@@ -1,5 +1,5 @@
 <?php 
-  class pengguna {
+  class PenggunaModel {
     private $Username;
     private $Password;
     private $NamaDepan;
@@ -16,28 +16,32 @@
       $this->conn = $database;
     }
 
-    function setUsername($Username) {
-      $this->Username = $Role;
+    function setUsername($username) {
+      $this->Username = $username;
     }
 
-    function setPassword($Password) {
-      $this->Password = $Password;
+    function setPassword($password) {
+      $this->Password = $password;
     }
 
-    function setNamaDepan($NamaDepan) {
-      $this->NamaDepan = $NamaDepan;
+    function setNamaDepan($namaDepan) {
+      $this->NamaDepan = $namaDepan;
     }
 
-    function setNamaBelakang($NamaBelakang) {
-      $this->NamaBelakang = $NamaBelakang;
+    function setNamaBelakang($namaBelakang) {
+      $this->NamaBelakang = $namaBelakang;
     }
 
-    function setNoHp($NoHp) {
-      $this->NoHp = $NoHp;
+    function setNoHp($noHp) {
+      $this->NoHp = $noHp;
     }
 
-    function setAlamat($Alamat) {
-      $this->Alamat = $Alamat;
+    function setAlamat($alamat) {
+      $this->Alamat = $alamat;
+    }
+
+    function setIdAkses($idAkses) {
+      $this->IdAkses = $idAkses;
     }
 
     function getIdPengguna() {
@@ -74,7 +78,7 @@
     
     function CreatePengguna() {
       try {
-        $query = "INSERT INTO pengguna(`username`, `password`, `nama_depan`, `nama_belakang`, `no_hp`, `alamat`, `id_akses`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO pengguna(`username`, `password`, `nama_depan`, `nama_belakang`, `no_hp`, `alamat`, `id_akses`) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $prepareDB = $this->conn->prepare($query);
         $SqlAddPengguna = $prepareDB->execute([$this->Username, $this->Password, $this->NamaDepan, $this->NamaBelakang, $this->NoHp, $this->Alamat, $this->IdAkses]);
         

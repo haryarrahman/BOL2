@@ -1,7 +1,9 @@
 <?php 
   require_once 'controllers/HakAkses.php';
+  require_once 'controllers/Pengguna.php';
 
   $hakAkses = new HakAksesController();
+  $pengguna = new PenggunaController;
 
-  $hakAkses->TableHakAkses();
+  $pengguna->FormPengguna();
 ?>
