@@ -1,6 +1,5 @@
 <?php
   require_once '../BOL2/config.php';
-
   require_once '../BOL2/models/HakAkses.php';
   require_once '../BOL2/views/HakAkses.php';
 
@@ -59,25 +58,42 @@
 
       $this->view->Form($defaultValue);
     }
-    
+
+    private function DeleteHakAkses() {
+      $data = $this->model->DeleteAkses($_POST['delete']);
+
+      if ($data) {
+        header("location: index.php");
+      }
+    }
 
     public function TableHakAkses() { 
       if (isset($_POST['id_akses']) && isset($_POST['nama_akses']) && isset($_POST['keterangan'])) {
           $this->SaveEdit();
-      } else if (isset($_POST['edit']) ) {
+          return;
+      } 
+      
+      if (isset($_POST['edit']) ) {
           $this->FormEditAkses();
-      } else {
-          $result = $this->model->GetListAkses();
-          $this->view->Table($result);
+          return;
+      } 
+      
+      if (isset($_POST['delete'])) {
+          $this->DeleteHakAkses();
+          return;
       }
+
+      $result = $this->model->GetListAkses();
+      $this->view->Table($result);
     }
 
     public function FormHakAkses() {
       if (isset($_POST['nama_akses']) && isset($_POST['keterangan'])) {
           $this->SaveCreate();
-      } else {
-          $this->CreateNewAkses();
-      }
+          return;
+      } 
+          
+      $this->CreateNewAkses();
     }
   }
 ?>
