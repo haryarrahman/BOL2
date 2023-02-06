@@ -5,7 +5,7 @@
           require_once '../BOL2/components/TablePengguna.php';
       }
 
-      public function Form($defaultValue) {
+      public function Form($defaultValue, $hakAkses) {
         require_once '../BOL2/components/FormPengguna.php';
       }
 

@@ -5,7 +5,12 @@
     <input type="text" name="nama_belakang" placeholder="Nama Belakang" value="<?php echo $defaultValue['nama_belakang']; ?>"><br/>
     <input type="text" name="no_hp" placeholder="No HP"value="<?php echo $defaultValue['no_hp']; ?>"><br/>
     <input type="text" name="alamat" placeholder="Alamat" value="<?php echo $defaultValue['alamat']; ?>"><br/>
-    <input type="text" name="id_akses" placeholder="Hak Akses" value="<?php echo $defaultValue['id_akses']; ?>"><br/>
+    <label for="id_akses">Pilih Hak Akses :</label>
+    <select name="id_akses">
+      <?php foreach ($hakAkses as $akses): ?>
+        <option value="<?php echo $akses['id_akses'] ?>"><?php echo $akses['nama_akses']; ?></option>
+      <?php endforeach; ?>
+    </select>
     <input type="hidden" name="id_pengguna" value="<?php echo $defaultValue['id_pengguna']; ?>" />
     <button type="submit">Submit</button>
 </form>

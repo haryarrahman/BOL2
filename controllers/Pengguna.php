@@ -1,12 +1,14 @@
 <?php 
    require_once '../BOL2/config.php';
    require_once '../BOL2/models/Pengguna.php';
+   require_once '../BOL2/models/HakAkses.php';
    require_once '../BOL2/views/Pengguna.php';
 
    class PenggunaController {
 
       private $model;
       private $view;
+      private $hakAksesModel;
 
       public function __construct() {
         $config = new DatabaseConfig();
@@ -14,6 +16,7 @@
   
         $this->model = new PenggunaModel($pdo);
         $this->view = new PenggunaView();
+        $this->hakAksesModel = new HakAksesModel($pdo);
       }
 
       private function SaveCreate() {
@@ -35,6 +38,7 @@
   
 
       private function CreateNewPengguna() {
+        $hakAkses = $this->hakAksesModel->GetListAkses();
         $defaultValue=[
           'username' => '',
           'password' => '',
@@ -44,13 +48,31 @@
           'alamat' => '',
           'id_akses' => ''
         ];
-  
-        $this->view->Form($defaultValue);
+
+        $this->view->Form($defaultValue, $hakAkses);
       }
 
       public function TablePengguna() {
         $result = $this->model->GetListPengguna();
         $this->view->Table($result);
+      }
+
+      private function FormEditPengguna() {
+        $id = $_POST['edit'];
+        $prevData = $this->model->FindPenggunaById($id)[0];
+        $hakAkses = $this->hakAksesModel->GetListAkses();
+  
+        $defaultValue=[
+          'username' => $prevData['username'],
+          'password' => $prevData['password'],
+          'nama_depan' => $prevData['nama_depan'],
+          'nama_belakang' => $prevData['nama_belakang'],
+          'no_hp' => $prevData['no_hp'],
+          'alamat' => $prevData['alamat'],
+          'id_akses' => $prevData['id_akses']
+        ];
+
+        $this->view->Form($defaultValue, $hakAkses);
       }
 
       public function FormPengguna() {
