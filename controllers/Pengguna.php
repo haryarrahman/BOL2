@@ -53,7 +53,26 @@
       }
 
       public function TablePengguna() {
-        $result = $this->model->GetListPengguna();
+        $data = $this->model->GetListPengguna();
+
+        $result = [];
+
+        foreach ($data as $user) {
+          $dataHakAkses = $this->hakAksesModel->FindAksesById($user['id_akses'])[0];
+
+          $dataUser = [
+            'username' => $user['username'],
+            'password' => $user['password'],
+            'nama_depan' => $user['nama_depan'],
+            'nama_belakang' => $user['nama_belakang'],
+            'no_hp' => $user['no_hp'],
+            'alamat' => $user['alamat'],
+            'hak_akses' => $dataHakAkses['nama_akses']
+          ];
+
+          array_push($result, $dataUser);
+        }
+
         $this->view->Table($result);
       }
 

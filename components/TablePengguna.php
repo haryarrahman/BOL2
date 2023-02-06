@@ -20,12 +20,12 @@
       <td><?= $user['hak_akses'] ?></td>
       <td>
         <form method="post">
-          <input type="hidden" name="edit" value="<?php echo $user['id_akses']; ?>">
+          <input type="hidden" name="edit" value="<?php echo $user['id_pengguna']; ?>">
           <input type="submit" value="Edit">
         </form>
 
         <form method="post">
-          <input type="hidden" name="delete" value="<?php echo $user['id_akses']; ?>">
+          <input type="hidden" name="delete" value="<?php echo $user['id_pengguna']; ?>">
           <input type="submit" value="Delete">
         </form>
       </td>
