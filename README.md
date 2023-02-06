@@ -1,5 +1,5 @@
 # Binus Online Learning - Information System 
-Introduction To Programming 
+Introduction to Data and Information Management
 
 Instructor(s)
 1. Teguh Prasandy, S.Pi., S.Kom., M.Kom.
